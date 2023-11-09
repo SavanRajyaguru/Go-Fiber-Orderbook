@@ -8,17 +8,30 @@ import (
 )
 
 type RequestBody struct {
-	UserID       string                `json:"userId" validate:"required"`
-	EventID      string                `json:"eventId" validate:"required"`
+	UserId      string                `json:"userId" validate:"required"`
+	EventId      string                `json:"eventId" validate:"required"`
 	Price        float32               `json:"price" validate:"required,lte=9.5,gte=0.5"`
 	Qty          int16                 `json:"qty" validate:"required,gte=1"`
 	Side         helper.Sides          `json:"side" validate:"required,uppercase"`
 	PurchaseFlag helper.FlagOfPurchase `json:"purchaseFlag" validate:"required,uppercase"`
 }
 
+type UpdateBody struct {
+	OrderId uuid.UUID		`json:"orderId" validate:"required"`
+	UserId      string                `json:"userId" validate:"required"`
+	EventId      string                `json:"eventId" validate:"required"`
+	Price        float32               `json:"price" validate:"required,lte=9.5,gte=0.5"`
+	PreQty          int16                 `json:"preQty" validate:"required,gte=1"`
+	NewQty          int16                 `json:"newQty" validate:"required,gte=1"`
+	Side         helper.Sides          `json:"side" validate:"required,uppercase"`
+	PurchaseFlag helper.FlagOfPurchase `json:"purchaseFlag" validate:"required,uppercase"`
+	CreatedAt int64		`json:"created_At" validate:"required"`
+}
+
 type PlacedOrder struct {
-	YesOrderId uuid.UUID `json:"yes_orderId"`
-	NoOrderId  uuid.UUID `json:"no_orderId"`
+	PlacedOrderId uuid.UUID `json:"order_id"`
+	// YesOrderId uuid.UUID `json:"yes_orderId"`
+	// NoOrderId  uuid.UUID `json:"no_orderId"`
 	YesUserId  string    `json:"yes_uid"`
 	NoUserId   string    `json:"no_uid"`
 	EventId    string    `json:"eid"`
@@ -30,10 +43,11 @@ type PlacedOrder struct {
 }
 
 type Order struct {
+	CreatedAt int64	
 	ID     uuid.UUID
 	UserId string
 	Price  float32
-	Qty    int16
+	// Qty    int16
 }
 
 type DataStruct struct {

@@ -8,10 +8,8 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/helmet/v2"
 	"github.com/opinion-trading/config"
-	"github.com/opinion-trading/database"
 	"github.com/opinion-trading/helper/response"
 	"github.com/opinion-trading/middleware"
-	"github.com/opinion-trading/migration"
 	redisclient "github.com/opinion-trading/redis_client"
 )
 
@@ -19,8 +17,8 @@ func init() {
 	config.InitEnvVariables()
 	response.ResponseMsg()
 	response.ResponseWord()
-	database.ConnectDB()
-	migration.LoadAllSchema()
+	// database.ConnectDB()
+	// migration.LoadAllSchema()
 	redisclient.Connect()
 	// cron.ImplementCron()
 }
